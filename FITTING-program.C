@@ -4,7 +4,7 @@ TCanvas *c1 = new TCanvas("c1", "canvas", 800, 600);
 TGraphErrors *gr1 = new TGraphErrors();
 ifstream file;
 
-double x, Y, u_Y, st, dr;
+double x, Y, u_Y, st, dr, x_min, x_max;
 int i=0;
 string fName;
 
@@ -28,9 +28,14 @@ while(1)
 	if(file.eof()) break;
 	gr1->SetPoint(i, x, Y);
 	gr1->SetPointError(i, 0, u_Y);
+	if(i == 0) x_min = x;
+	x_max = x;
 	i++;
 }
 file.close();
+cout << "\nCapetele x_min si x_max din fisierul de date:\n";
+cout << "  x_min = " << x_min << endl;
+cout << "  x_max = " << x_max << endl;
 cout << "\nScrieti capetele de fitare:\n";
 cout << "-capatul stanga: "; cin >> st;
 cout << "-capatul dreapta: "; cin >> dr;
