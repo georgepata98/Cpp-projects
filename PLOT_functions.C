@@ -1,17 +1,25 @@
 // Plotare f(x) in ROOT
 {
-    TCanvas *c1 = new TCanvas("c1", "canvas", 800, 600);
-    TGraph *gr1 = new TGraph();
     ifstream file;
+    string fileName;
 
-
-    // ---> Scrie aici numele fisierului de date (trebuie sa fie in acelasi dir. cu acest cod):
-    string filename = "AmBe_TRS403.txt";
+    // ---> Scrie aici numele fisierului de date:
+    fileName = "AmBe_TRS403.txt";
     
   
-    file.open(filename);
+    file.open(fileName);
+    if(!file)
+    {
+        cout << "\nNu s-a putut deschide fisierul " << fileName << endl;
+        return;
+    }
+
+    TCanvas *c1 = new TCanvas("c1", "canvas", 800, 600);
+    TGraph *gr1 = new TGraph();
+
     double x, y;
     int i = 0;
+
     while(1)
     {
         file >> x >> y;
@@ -30,6 +38,6 @@
     gr1->SetMarkerStyle(20);
     gr1->GetXaxis()->SetTitle("x");
     gr1->GetYaxis()->SetTitle("f(x)");
-    gr1->Draw("APL");
+    gr1->Draw("AL");
     c1->Update();
 }
