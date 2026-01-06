@@ -1,5 +1,4 @@
 {
-    TCanvas *c1 = new TCanvas("c1", "Canvas", 800, 600);
     fstream file;
     int nbins=0, i;
     double e0, e1, canal, pulsuri, eroare;
@@ -88,6 +87,8 @@
 
 
     // Reprezentare grafica
+
+    TCanvas *c1 = new TCanvas("c1", "Canvas", 800, 600);
 
     h1->SetTitle("MCNP spectrum");
     h1->GetXaxis()->SetTitle("Energy [keV]");
