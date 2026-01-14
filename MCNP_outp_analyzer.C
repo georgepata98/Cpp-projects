@@ -14,12 +14,11 @@
         cout << "\nEROARE: Nu s-a putut deschide fisierul " << a << ".txt !" << endl;
         return 1;
     }
-
-    while(1)  // gasire capete histograma (e0 si e1) si numar de bini
+    while(1)
     {
         file >> canal >> pulsuri >> eroare;
         if(file.eof()) break;
-        canal *= 1000; // keV -> MeV
+        canal *= 1000; // MeV -> keV
         if(nbins==0) { e0 = canal; }
         e1 = canal;
         nbins++;
@@ -39,21 +38,18 @@
         file >> canal >> pulsuri >> eroare;
         if(file.eof()) break;
         canal *= 1000;
-        i = h1->FindBin(canal + (e1-e0)/nbins/2);  // setare centru bin i
-        h1->SetBinContent(i, pulsuri);  // umplere binul i
-        h1->SetBinError(i, pulsuri*eroare);  // eroare binul i
+        i = h1->FindBin(canal + (e1-e0)/nbins/2);
+        h1->SetBinContent(i, pulsuri);
+        h1->SetBinError(i, pulsuri*eroare);
     }
     file.close();
 
-
-
-    // Eficacitatea absoluta la fotopic
 
     cout << "\nSe calculeaza eficacitatea absoluta la fotopic? (da/nu): "; cin >> a;
     if(a=="da" || a=="yes" || a=="y" || a=="d")
     {
         double e_st, e_dr, bin_width, bin_err, sum=0;
-        int bin_st, bin_dr;  // binul din stanga si dreapta al picului
+        int bin_st, bin_dr;
 
         bin_width = (e1-e0)/nbins;
         cout << "Largime canal = " << bin_width << " [keV]" << endl;
@@ -84,9 +80,6 @@
         cout << "\nEficacitate_detectie(delta_ch) = " << h1->Integral(bin_st, bin_dr) << " +/- " << sum << endl;
     }
 
-
-
-    // Reprezentare grafica
 
     TCanvas *c1 = new TCanvas("c1", "Canvas", 800, 600);
 
