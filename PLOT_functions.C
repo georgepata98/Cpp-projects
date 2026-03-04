@@ -1,43 +1,35 @@
-// Plotare f(x) in ROOT
+// Plotare Y(x) in ROOT
 {
-    ifstream file;
-    string fileName;
-
-    // ---> Scrie aici numele fisierului de date:
-    fileName = "AmBe_TRS403.txt";
-    
-  
-    file.open(fileName);
-    if(!file)
-    {
-        cout << "\nNu s-a putut deschide fisierul " << fileName << endl;
-        return;
-    }
-
-    TCanvas *c1 = new TCanvas("c1", "canvas", 800, 600);
-    TGraph *gr1 = new TGraph();
-
-    double x, y;
-    int i = 0;
-
-    while(1)
-    {
-        file >> x >> y;
-        if(file.eof()) break;
-      
-        gr1->SetPoint(i, x, y);
-        i++;
-    }
-    file.close();
+TGraph *gr1 = new TGraph();
+ifstream file;
+string filename;
+double x, y;
+int i = 0;
 
 
-    c1->SetGrid();
-    gr1->SetLineWidth(1);
-    gr1->SetLineColor(kBlue);
-    gr1->SetMarkerColor(kBlue);
-    gr1->SetMarkerStyle(20);
-    gr1->GetXaxis()->SetTitle("x");
-    gr1->GetYaxis()->SetTitle("f(x)");
-    gr1->Draw("AL");
-    c1->Update();
+// Scrie mai jos numele fisierului de date (trebuie sa fie in acelasi folder cu acest cod):
+filename = "AmBe_TRS403.txt";
+// IMPORTANT: Fisierul cu date trebuie sa aiba 2 coloane (pe prima X si pe a doua Y).
+
+
+file.open(filename);
+while(1)
+{
+    file >> x >> y;
+    if(file.eof()) break;
+    gr1->SetPoint(i, x, y);
+    i++;
+}
+file.close();
+
+TCanvas *c1 = new TCanvas("c1", "canvas", 1000, 600);
+c1->SetGrid();
+gr1->SetLineWidth(1);
+gr1->SetLineColor(kBlue);
+gr1->SetMarkerColor(kBlue);
+gr1->SetMarkerStyle(20);
+gr1->GetXaxis()->SetTitle("x");
+gr1->GetYaxis()->SetTitle("Y(x)");
+gr1->Draw("APL");
+c1->Update();
 }
