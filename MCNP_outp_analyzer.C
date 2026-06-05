@@ -14,10 +14,9 @@
         cout << "\nEROARE: Nu s-a putut deschide fisierul " << a << ".txt !" << endl;
         return 1;
     }
-    while(1)
+    while(!file.eof())
     {
         file >> canal >> pulsuri >> eroare;
-        if(file.eof()) break;
         canal *= 1000; // MeV -> keV
         if(nbins==0) { e0 = canal; }
         e1 = canal;
@@ -33,10 +32,9 @@
     TH1F *h1 = new TH1F("h1", "MCNP spectrum", nbins, e0, e1);
 
     file.open((a + ".txt").c_str(), ios::in);
-    while(1)
+    while(!file.eof())
     {
         file >> canal >> pulsuri >> eroare;
-        if(file.eof()) break;
         canal *= 1000;
         i = h1->FindBin(canal + (e1-e0)/nbins/2);
         h1->SetBinContent(i, pulsuri);
