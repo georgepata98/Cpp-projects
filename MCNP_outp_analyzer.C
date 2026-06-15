@@ -81,8 +81,8 @@
 
     TCanvas *c1 = new TCanvas("c1", "Canvas", 800, 600);
     
-    h1->SetTitle("MCNP spectrum");
-    h1->GetXaxis()->SetTitle("Energy (keV)");
+    h1->SetTitle("MCNP simulated spectrum");
+    h1->GetXaxis()->SetTitle("Energy (MeV)");
     h1->GetYaxis()->SetTitle("Counts");
     h1->Draw("hsit");
     c1->Update();
