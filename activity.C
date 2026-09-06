@@ -22,7 +22,6 @@ if (opt == 3) opt2 = "ani";
 cout << "\nPeste cat timp de la timpul 0 doriti activitatea calculata?\n";
 cout << "Timpul trebuie precizat in " << opt2 << " fata de timpul 0: ";
 cin >> t;
-
 while (t < 0)
 {
     cout << "Selectati un timp mai mare de 0: "; cin >> t;
@@ -30,10 +29,13 @@ while (t < 0)
 
 cout << "T1/2 al radionuclidului ales, in " << opt2 << ": ";
 cin >> halft;
+while (halft < 0)
+{
+    cout << "Selectati un T1/2 mai mare de 0: "; cin >> halft;
+}
 
 cout << "Activitatea la timpul 0: ";
 cin >> A0;
-
 while (A0 < 0)
 {
     cout << "Selectati o activitate mai mare de 0: "; cin >> A0;
